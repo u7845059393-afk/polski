@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odprawa posłów greckich – streszczenie, bohaterowie, quiz (20 pytań)</title>
+    <style>
+        :root {
+            --main-bg: #f8f1e4;
+            --card-bg: #fffaf2;
+            --border-color: #c9a96e;
+            --accent: #8b5a2b;
+            --text: #2d2d2d;
+            --heading: #5a3825;
+            --correct: #2e7d32;
+            --incorrect: #c62828;
+            --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--text);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            background-image: linear-gradient(45deg, #f0e4d0 0%, #f8f1e4 100%);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 3px double var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            color: var(--heading);
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #6b4f3a;
+            font-size: 1.1rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--heading);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #4a2e1a;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .act {
+            background: #faf3e8;
+            border-left: 4px solid var(--border-color);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .act strong {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .character-card {
+            background: #fefcf8;
+            border: 1px solid #e4d5be;
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .character-card:hover {
+            transform: translateX(6px);
+            background: #fff8ef;
+        }
+
+        .character-name {
+            font-weight: bold;
+            color: var(--accent);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .main-thread {
+            background: #fdf6e9;
+            border: 2px dashed var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-size: 1.05rem;
+        }
+
+        .quiz-section {
+            margin-top: 2.5rem;
+            background: #f9f1e6;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #dcc9a8;
+        }
+
+        .quiz-section h2 {
+            margin-top: 0;
+            border-left: none;
+            text-align: center;
+            padding-left: 0;
+        }
+
+        .question {
+            background: white;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 0.7rem;
+            text-align: left;
+        }
+
+        .options label {
+            display: block;
+            padding: 0.4rem 0;
+            cursor: pointer;
+            transition: color 0.15s;
+        }
+
+        .options label:hover {
+            color: var(--accent);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 0.6rem;
+            accent-color: var(--accent);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, transform 0.1s;
+            margin-top: 1rem;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background-color: #6d4220;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #e8ddd0;
+            color: var(--heading);
+        }
+
+        .correct-answer {
+            color: var(--correct);
+            font-weight: bold;
+        }
+
+        .wrong-answer {
+            color: var(--incorrect);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #7a6a5a;
+            font-style: italic;
+        }
+
+        .toc {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--accent);
+            background: #f3e7d8;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            border: 1px solid #d4b48c;
+            transition: background 0.2s;
+        }
+
+        .toc a:hover {
+            background: #e8d5bd;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .quiz-section {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Odprawa posłów greckich</h1>
+        <div class="subtitle">Jan Kochanowski – streszczenie, bohaterowie, wątek główny i rozszerzony quiz (20 pytań)</div>
+    </header>
+
+    <nav class="toc">
+        <a href="#streszczenie">Streszczenie</a>
+        <a href="#bohaterowie">Bohaterowie</a>
+        <a href="#watek">Wątek główny</a>
+        <a href="#quiz">Quiz</a>
+    </nav>
+
+    <!-- Streszczenie -->
+    <section id="streszczenie">
+        <h2>Dokładne streszczenie</h2>
+        <p><em>Gatunek:</em> tragedia renesansowa (pierwsza polska tragedia nowożytna)<br>
+        <em>Czas i miejsce akcji:</em> starożytna Troja, przed wybuchem wojny trojańskiej</p>
+
+        <div class="act">
+            <strong>Akt I</strong>
+            <p>Antenor, jeden z najrozsądniejszych obywateli Troi, rozmawia z Aleksandrem (Parysem). Antenor opowiada się za oddaniem Heleny Grekom, gdyż uważa, że zatrzymywanie cudzej żony jest niegodziwe i grozi wojną. Aleksander próbuje go przekupić obietnicą bogactw i wpływów, by poparł jego sprawę na radzie królewskiej. Antenor stanowczo odmawia, kierując się dobrem ojczyzny, a nie prywatą. Po odejściu Aleksandra Antenor zapowiada, że na radzie będzie bronił sprawiedliwości.</p>
+        </div>
+
+        <div class="act">
+            <strong>Akt II</strong>
+            <p>Helena skarży się przed Panią Starą (towarzyszką) na swój los. Czuje się winna, bo z powodu niej Troi grozi zagłada. Obawia się gniewu Trojan i męża Menelaosa. Pani Stara pociesza ją, ale rozmowa ujawnia egoizm i lekkomyślność Heleny – bardziej niż o los miasta martwi się o własną pozycję. Helena wie, że Grecy przybyli po nią, lecz nie robi nic, by zapobiec tragedii.</p>
+        </div>
+
+        <div class="act">
+            <strong>Akt III</strong>
+            <p>Do Troi przybywają posłowie greccy: Ulisses i Menelaos. Menelaos domaga się zwrotu żony i zagrabionych skarbów. Ulisses w mowie do króla Priama argumentuje, że zatrzymywanie Heleny to łamanie praw boskich i ludzkich, a wojna będzie nieunikniona. Priam, słaby i niezdecydowany, zwołuje radę, by podjąć decyzję.</p>
+        </div>
+
+        <div class="act">
+            <strong>Akt IV</strong>
+            <p>Na radzie trojańskiej dochodzi do starcia racji. Antenor opowiada się za oddaniem Heleny – kieruje się sprawiedliwością, prawem międzynarodowym i dobrem państwa. Aleksander przeciwnie: szantażuje radę, poniża Antenora, odwołuje się do emocji i prywatnych korzyści. Stary doradca Iketaon popiera Antenora, ale ostatecznie rada pod wpływem Aleksandra i króla decyduje się zatrzymać Helenę. Zapada decyzja o odrzuceniu żądań Greków – Troja wybiera wojnę.</p>
+        </div>
+
+        <div class="act">
+            <strong>Akt V</strong>
+            <p>Kasandra, wieszczka i córka Priama, w proroczym szale przepowiada upadek Troi: pożar, śmierć mieszkańców, rzeź. Nikt jej nie wierzy. Rotmistrz, młody żołnierz, dowiaduje się o odrzuceniu poselstwa i postanawia wyruszyć na wojnę, mimo próśb ukochanej. Pojawia się więzień-grek, który opowiada o przygotowaniach Greków do wojny. Tragedia kończy się zapowiedzią katastrofy, która jest nieuchronna.</p>
+        </div>
+    </section>
+
+    <!-- Bohaterowie -->
+    <section id="bohaterowie">
+        <h2>Krótkie opisy bohaterów</h2>
+
+        <div class="character-card">
+            <span class="character-name">Antenor</span>
+            <p>Wzór patrioty i mędrca. Kieruje się dobrem państwa, sprawiedliwością i rozumem. Odmawia korupcji, broni słusznej sprawy, choć przegrywa. Reprezentuje ideał obywatela.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Aleksander (Parys)</span>
+            <p>Samolubny, porywczy i nieodpowiedzialny. Kieruje się wyłącznie własnymi namiętnościami i interesem. Przekupuje, kłamie i manipuluje radą, doprowadzając kraj do zguby.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Helena</span>
+            <p>Przyczyna konfliktu. Świadoma swojej winy, ale bierna i skupiona na sobie. Jest raczej symbolem nieodpowiedzialnej miłości niż pełnokrwistą postacią tragiczną.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Priam</span>
+            <p>Król Troi, słaby i niezdecydowany. Ulega synowi i większości rady, nie potrafi podjąć mądrej decyzji dla dobra państwa.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Ulisses</span>
+            <p>Grecki poseł, mówca rozsądny i elokwentny. Przedstawia racjonalne argumenty prawne i moralne za oddaniem Heleny.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Menelaos</span>
+            <p>Pokrzywdzony mąż Heleny. Jego obecność podkreśla osobisty wymiar konfliktu.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Kasandra</span>
+            <p>Tragiczna wieszczka, której nikt nie wierzy. Przepowiada zagładę Troi; jest głosem ostrzeżenia, który zostaje zlekceważony.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Rotmistrz</span>
+            <p>Młody żołnierz, postać epizodyczna. Symbolizuje poświęcenie dla ojczyzny, kontrastując z prywatą Parysa.</p>
+        </div>
+
+        <div class="character-card">
+            <span class="character-name">Pani Stara</span>
+            <p>Powierniczka Heleny, uosobienie dworskiej obłudy i schlebiania.</p>
+        </div>
+    </section>
+
+    <!-- Wątek główny -->
+    <section id="watek">
+        <h2>Opis głównego wątku</h2>
+        <div class="main-thread">
+            <p>Główny wątek tragedii to <strong>konflikt między dobrem państwa a prywatą jednostki</strong>. Posłowie greccy żądają zwrotu Heleny, co jest zgodne z prawem i rozsądkiem – uratowałoby Troję przed wojną. Jednak Parys, kierowany egoizmem i namiętnością, nie chce jej oddać. Rada trojańska pod jego wpływem podejmuje decyzję o zatrzymaniu Heleny, co oznacza wybór wojny i w konsekwencji zagładę miasta. Kochanowski ukazuje, jak <strong>nierozważne decyzje władców, uleganie emocjom i brak odpowiedzialności za państwo</strong> prowadzą do katastrofy całej wspólnoty. Tragedia ma wymowę polityczną – była przestrogą dla szlachty i władców Rzeczypospolitej przed prywatą i lekceważeniem dobra publicznego.</p>
+        </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz" class="quiz-section">
+        <h2>Quiz sprawdzający wiedzę</h2>
+        
+
+        <!-- Pytanie 1 -->
+        <div class="question" id="q1">
+            <p>1. Jakie jest dokładne określenie gatunku literackiego „Odprawy posłów greckich"?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="a"> a) Komedia renesansowa</label>
+                <label><input type="radio" name="q1" value="b"> b) Tragedia renesansowa</label>
+                <label><input type="radio" name="q1" value="c"> c) Poemat heroikomiczny</label>
+                <label><input type="radio" name="q1" value="d"> d) Dramat romantyczny</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 2 -->
+        <div class="question" id="q2">
+            <p>2. Kto jest autorem „Odprawy posłów greckich"?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="a"> a) Mikołaj Rej</label>
+                <label><input type="radio" name="q2" value="b"> b) Jan Kochanowski</label>
+                <label><input type="radio" name="q2" value="c"> c) Ignacy Krasicki</label>
+                <label><input type="radio" name="q2" value="d"> d) Adam Mickiewicz</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 3 -->
+        <div class="question" id="q3">
+            <p>3. W jakim mieście toczy się akcja utworu?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="a"> a) Ateny</label>
+                <label><input type="radio" name="q3" value="b"> b) Troja</label>
+                <label><input type="radio" name="q3" value="c"> c) Sparta</label>
+                <label><input type="radio" name="q3" value="d"> d) Mykeny</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 4 -->
+        <div class="question" id="q4">
+            <p>4. Który z bohaterów stanowczo odmówił przyjęcia łapówki od Parysa?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="a"> a) Iketaon</label>
+                <label><input type="radio" name="q4" value="b"> b) Antenor</label>
+                <label><input type="radio" name="q4" value="c"> c) Priam</label>
+                <label><input type="radio" name="q4" value="d"> d) Rotmistrz</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 5 -->
+        <div class="question" id="q5">
+            <p>5. Jaką propozycję złożył Aleksander (Parys) Antenorowi, aby go przekonać do swoich racji?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="a"> a) Stanowisko w radzie królewskiej</label>
+                <label><input type="radio" name="q5" value="b"> b) Bogactwa i wpływy</label>
+                <label><input type="radio" name="q5" value="c"> c) Rękę swojej siostry</label>
+                <label><input type="radio" name="q5" value="d"> d) Dowództwo nad armią</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 6 -->
+        <div class="question" id="q6">
+            <p>6. Kto towarzyszył Menelaosowi w poselstwie do Troi?</p>
+            <div class="options">
+                <label><input type="radio" name="q6" value="a"> a) Achilles</label>
+                <label><input type="radio" name="q6" value="b"> b) Odyseusz (Ulisses)</label>
+                <label><input type="radio" name="q6" value="c"> c) Agamemnon</label>
+                <label><input type="radio" name="q6" value="d"> d) Nestor</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 7 -->
+        <div class="question" id="q7">
+            <p>7. Jaki był główny argument Ulissesa w mowie do króla Priama, uzasadniający oddanie Heleny?</p>
+            <div class="options">
+                <label><input type="radio" name="q7" value="a"> a) Groźba natychmiastowego ataku</label>
+                <label><input type="radio" name="q7" value="b"> b) Złamanie praw boskich i ludzkich</label>
+                <label><input type="radio" name="q7" value="c"> c) Prośba o litość dla Menelaosa</label>
+                <label><input type="radio" name="q7" value="d"> d) Obietnica pokoju i sojuszu</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 8 -->
+        <div class="question" id="q8">
+            <p>8. Jak król Priam zareagował na żądania posłów greckich?</p>
+            <div class="options">
+                <label><input type="radio" name="q8" value="a"> a) Natychmiast je odrzucił</label>
+                <label><input type="radio" name="q8" value="b"> b) Zwołał radę, aby podjąć decyzję</label>
+                <label><input type="radio" name="q8" value="c"> c) Wypędził posłów z miasta</label>
+                <label><input type="radio" name="q8" value="d"> d) Poprosił o czas do namysłu</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 9 -->
+        <div class="question" id="q9">
+            <p>9. Kto na radzie trojańskiej poparł stanowisko Antenora?</p>
+            <div class="options">
+                <label><input type="radio" name="q9" value="a"> a) Priam</label>
+                <label><input type="radio" name="q9" value="b"> b) Iketaon</label>
+                <label><input type="radio" name="q9" value="c"> c) Parys</label>
+                <label><input type="radio" name="q9" value="d"> d) Kasandra</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 10 -->
+        <div class="question" id="q10">
+            <p>10. Jaką decyzję ostatecznie podjęła rada trojańska w sprawie Heleny?</p>
+            <div class="options">
+                <label><input type="radio" name="q10" value="a"> a) Oddania Heleny Grekom</label>
+                <label><input type="radio" name="q10" value="b"> b) Zatrzymania Heleny w Troi</label>
+                <label><input type="radio" name="q10" value="c"> c) Wygnania Parysa</label>
+                <label><input type="radio" name="q10" value="d"> d) Wypowiedzenia wojny Grekom</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 11 -->
+        <div class="question" id="q11">
+            <p>11. Co przepowiedziała Kasandra, córka Priama?</p>
+            <div class="options">
+                <label><input type="radio" name="q11" value="a"> a) Zwycięstwo Troi</label>
+                <label><input type="radio" name="q11" value="b"> b) Upadek Troi: pożar, śmierć, rzeź</label>
+                <label><input type="radio" name="q11" value="c"> c) Powrót Heleny do Grecji</label>
+                <label><input type="radio" name="q11" value="d"> d) Zdradę Parysa</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 12 -->
+        <div class="question" id="q12">
+            <p>12. Dlaczego Rotmistrz postanowił wyruszyć na wojnę?</p>
+            <div class="options">
+                <label><input type="radio" name="q12" value="a"> a) Bo został do tego zmuszony przez króla</label>
+                <label><input type="radio" name="q12" value="b"> b) Bo dowiedział się o odrzuceniu poselstwa i chciał bronić ojczyzny</label>
+                <label><input type="radio" name="q12" value="c"> c) Bo obiecano mu bogactwa</label>
+                <label><input type="radio" name="q12" value="d"> d) Bo chciał zdobyć sławę jako wojownik</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 13 -->
+        <div class="question" id="q13">
+            <p>13. Jakie uczucia towarzyszą Helenie na początku aktu II?</p>
+            <div class="options">
+                <label><input type="radio" name="q13" value="a"> a) Radość i beztroska</label>
+                <label><input type="radio" name="q13" value="b"> b) Poczucie winy i strach przed konsekwencjami</label>
+                <label><input type="radio" name="q13" value="c"> c) Gniew na Parysa</label>
+                <label><input type="radio" name="q13" value="d"> d) Tęsknota za Grecją</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 14 -->
+        <div class="question" id="q14">
+            <p>14. Kto jest uosobieniem dworskiej obłudy i schlebiania w utworze?</p>
+            <div class="options">
+                <label><input type="radio" name="q14" value="a"> a) Antenor</label>
+                <label><input type="radio" name="q14" value="b"> b) Pani Stara</label>
+                <label><input type="radio" name="q14" value="c"> c) Ulisses</label>
+                <label><input type="radio" name="q14" value="d"> d) Menelaos</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 15 -->
+        <div class="question" id="q15">
+            <p>15. Kto w utworze reprezentuje postawę patriotyczną i odpowiedzialność za państwo?</p>
+            <div class="options">
+                <label><input type="radio" name="q15" value="a"> a) Parys</label>
+                <label><input type="radio" name="q15" value="b"> b) Helena</label>
+                <label><input type="radio" name="q15" value="c"> c) Antenor</label>
+                <label><input type="radio" name="q15" value="d"> d) Priam</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 16 -->
+        <div class="question" id="q16">
+            <p>16. Jaki był główny argument Antenora przemawiający za oddaniem Heleny?</p>
+            <div class="options">
+                <label><input type="radio" name="q16" value="a"> a) Strach przed armią grecką</label>
+                <label><input type="radio" name="q16" value="b"> b) Sprawiedliwość i dobro państwa</label>
+                <label><input type="radio" name="q16" value="c"> c) Nienawiść do Parysa</label>
+                <label><input type="radio" name="q16" value="d"> d) Chęć zysku</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 17 -->
+        <div class="question" id="q17">
+            <p>17. Kogo w dramacie symbolizuje Rotmistrz?</p>
+            <div class="options">
+                <label><input type="radio" name="q17" value="a"> a) Zdradę ojczyzny</label>
+                <label><input type="radio" name="q17" value="b"> b) Poświęcenie dla ojczyzny</label>
+                <label><input type="radio" name="q17" value="c"> c) Obłudę dworską</label>
+                <label><input type="radio" name="q17" value="d"> d) Nierozważną miłość</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 18 -->
+        <div class="question" id="q18">
+            <p>18. Jak zakończyła się akcja tragedii?</p>
+            <div class="options">
+                <label><input type="radio" name="q18" value="a"> a) Śmiercią Parysa</label>
+                <label><input type="radio" name="q18" value="b"> b) Ucieczką Heleny z Troi</label>
+                <label><input type="radio" name="q18" value="c"> c) Zapowiedzią nieuchronnej katastrofy (upadku Troi)</label>
+                <label><input type="radio" name="q18" value="d"> d) Zawarciem pokoju</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 19 -->
+        <div class="question" id="q19">
+            <p>19. Jaki konflikt jest głównym tematem „Odprawy posłów greckich"?</p>
+            <div class="options">
+                <label><input type="radio" name="q19" value="a"> a) Konflikt pokoleń</label>
+                <label><input type="radio" name="q19" value="b"> b) Konflikt między dobrem państwa a prywatą jednostki</label>
+                <label><input type="radio" name="q19" value="c"> c) Konflikt religijny</label>
+                <label><input type="radio" name="q19" value="d"> d) Konflikt klasowy</label>
+            </div>
+        </div>
+
+        <!-- Pytanie 20 -->
+        <div class="question" id="q20">
+            <p>20. Kto z posłów greckich wygłosił mowę do króla Priama, przedstawiając argumenty prawne i moralne?</p>
+            <div class="options">
+                <label><input type="radio" name="q20" value="a"> a) Menelaos</label>
+                <label><input type="radio" name="q20" value="b"> b) Ulisses</label>
+                <label><input type="radio" name="q20" value="c"> c) Agamemnon</label>
+                <label><input type="radio" name="q20" value="d"> d) Achilles</label>
+            </div>
+        </div>
+
+        <button class="btn" id="checkBtn">Sprawdź odpowiedzi</button>
+        <div id="result"></div>
+    </section>
+
+    <footer>
+        Opracowano na podstawie tragedii Jana Kochanowskiego „Odprawa posłów greckich".
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // Poprawne odpowiedzi dla 20 pytań
+        const correctAnswers = {
+            q1: 'b',  // tragedia renesansowa
+            q2: 'b',  // Jan Kochanowski
+            q3: 'b',  // Troja
+            q4: 'b',  // Antenor
+            q5: 'b',  // Bogactwa i wpływy
+            q6: 'b',  // Ulisses
+            q7: 'b',  // Złamanie praw boskich i ludzkich
+            q8: 'b',  // Zwołał radę
+            q9: 'b',  // Iketaon
+            q10: 'b', // Zatrzymanie Heleny
+            q11: 'b', // Upadek Troi
+            q12: 'b', // Bo dowiedział się o odrzuceniu poselstwa...
+            q13: 'b', // Poczucie winy i strach
+            q14: 'b', // Pani Stara
+            q15: 'c', // Antenor
+            q16: 'b', // Sprawiedliwość i dobro państwa
+            q17: 'b', // Poświęcenie dla ojczyzny
+            q18: 'c', // Zapowiedź katastrofy
+            q19: 'b', // Konflikt dobro państwa vs prywata
+            q20: 'b'  // Ulisses
+        };
+
+        const checkBtn = document.getElementById('checkBtn');
+        const resultDiv = document.getElementById('result');
+
+        checkBtn.addEventListener('click', function() {
+            let score = 0;
+            const total = Object.keys(correctAnswers).length;
+            let allAnswered = true;
+
+            // Sprawdzenie, czy wszystkie pytania mają zaznaczoną odpowiedź
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                if (!selected) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+
+            if (!allAnswered) {
+                resultDiv.innerHTML = '<span style="color: #c62828;">Proszę odpowiedzieć na wszystkie pytania!</span>';
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            // Resetowanie kolorów
+            document.querySelectorAll('.options label').forEach(label => {
+                label.classList.remove('correct-answer', 'wrong-answer');
+            });
+
+            // Sprawdzanie odpowiedzi i kolorowanie
+            for (let q in correctAnswers) {
+                const selected = document.querySelector(`input[name="${q}"]:checked`);
+                const parentLabel = selected.parentElement;
+                const correctValue = correctAnswers[q];
+                const correctLabel = document.querySelector(`input[name="${q}"][value="${correctValue}"]`).parentElement;
+
+                if (selected.value === correctValue) {
+                    score++;
+                    parentLabel.classList.add('correct-answer');
+                } else {
+                    parentLabel.classList.add('wrong-answer');
+                    correctLabel.classList.add('correct-answer');
+                }
+            }
+
+            // Wyświetlenie wyniku
+            const percent = Math.round((score / total) * 100);
+            let message = '';
+            if (percent === 100) {
+                message = '🏆 Doskonale! Znasz lekturę na medal!';
+            } else if (percent >= 80) {
+                message = '👍 Bardzo dobrze!';
+            } else if (percent >= 60) {
+                message = '📖 Całkiem nieźle, ale warto powtórzyć.';
+            } else if (percent >= 40) {
+                message = '📚 Wymaga powtórki.';
+            } else {
+                message = '😕 Niestety, przeczytaj jeszcze raz opracowanie.';
+            }
+
+            resultDiv.innerHTML = `Twój wynik: ${score}/${total} (${percent}%)<br>${message}`;
+            resultDiv.style.display = 'block';
+        });
+    })();
+</script>
+</body>
+</html>
